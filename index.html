@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lumi – révise sans stress</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4efff;--ink:#1d1640;--mute:#6b6394;--glass:rgba(255,255,255,.62);--bd:rgba(255,255,255,.9);--in:rgba(255,255,255,.7);--g1:#7c5cff;--g2:#ff7ad9;--g3:#4fd6e8;--hi:#ffd166;--ok:#17a673;--bad:#e5484d;--blob:.55;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0a1f;--ink:#f1edff;--mute:#a49fcc;--glass:rgba(255,255,255,.07);--bd:rgba(255,255,255,.14);--in:rgba(255,255,255,.08);--blob:.4;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0a1f;--ink:#f1edff;--mute:#a49fcc;--glass:rgba(255,255,255,.07);--bd:rgba(255,255,255,.14);--in:rgba(255,255,255,.08);--blob:.4;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;min-height:100vh;overflow-x:hidden}
+.aur{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.aur i{position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px);opacity:var(--blob)}
+.aur i:nth-child(1){background:var(--g1);top:-25vmax;left:-15vmax;animation:d1 28s ease-in-out infinite alternate}
+.aur i:nth-child(2){background:var(--g2);bottom:-30vmax;right:-20vmax;animation:d1 34s ease-in-out infinite alternate-reverse}
+.aur i:nth-child(3){background:var(--g3);top:35%;left:40%;width:35vmax;height:35vmax;opacity:calc(var(--blob)*.6);animation:d1 40s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(12vmax,8vmax) scale(1.15)}}
+@media (prefers-reduced-motion:reduce){.aur i{animation:none}}
+main{max-width:620px;margin:0 auto;padding:18px 16px 120px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+h1{font-size:3rem;font-weight:800;margin:0;letter-spacing:-.05em;line-height:1;background:linear-gradient(100deg,var(--g1),var(--g2) 55%,var(--hi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{color:var(--mute);margin:2px 0 18px;font-weight:300;font-size:1.05rem}
+.streak{background:var(--glass);border:1px solid var(--bd);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:99px;padding:7px 14px;font-weight:600;white-space:nowrap}
+.card,.sess{background:var(--glass);border:1px solid var(--bd);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:22px;padding:16px;margin-bottom:12px}
+.sess{display:flex;gap:12px;align-items:center;padding:12px 16px;border-radius:18px;margin-bottom:8px}
+.sess.done{opacity:.5;text-decoration:line-through}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}
+.grow{flex:1;min-width:120px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--in);border:1px solid var(--bd);border-radius:14px;padding:11px 13px;width:100%}
+textarea{min-height:70px;resize:vertical}
+::placeholder{color:var(--mute);opacity:.7}
+label{font-size:.85rem;color:var(--mute);display:block;margin-bottom:4px}
+button{font:inherit;cursor:pointer}
+.b{font-weight:600;border:0;color:#fff;background:linear-gradient(100deg,var(--g1),var(--g2));padding:11px 18px;border-radius:14px;box-shadow:0 8px 24px -8px var(--g1)}
+.b:disabled{opacity:.5}
+.g{background:var(--in);color:var(--ink);border:1px solid var(--bd);box-shadow:none}
+.ok{background:var(--ok);box-shadow:none}.bad{background:var(--bad);box-shadow:none}
+.x{border:0;background:none;color:var(--mute);padding:4px 8px}
+:focus-visible{outline:3px solid var(--g3);outline-offset:2px}
+h2{font-size:1.2rem;font-weight:600;margin:20px 0 8px}
+.mute{color:var(--mute);font-size:.9rem}
+.pill{font-size:.78rem;font-weight:600;background:linear-gradient(100deg,var(--hi),#ffb86b);color:#3a2600;border-radius:99px;padding:3px 10px;white-space:nowrap}
+.sess input[type=checkbox]{width:22px;height:22px;accent-color:var(--g1)}
+.day{font-weight:600;margin:16px 4px 6px}
+.study{min-height:230px;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:26px}
+.study .q{font-size:1.5rem;font-weight:600}
+.study .a{font-size:1.25rem;margin-top:16px;font-weight:800;background:linear-gradient(100deg,var(--g1),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.empty{text-align:center;color:var(--mute);padding:24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{text-align:center;margin:0}.stat b{display:block;font-size:2.2rem;font-weight:800}
+.bars{display:flex;gap:8px;align-items:flex-end;height:110px;margin-top:10px}
+.bars div{flex:1;text-align:center;font-size:.75rem;color:var(--mute)}.bars span{display:block;background:linear-gradient(var(--g2),var(--g1));border-radius:8px 8px 4px 4px;min-height:4px;margin-bottom:4px}
+nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 12px);width:min(92vw,420px);display:flex;gap:2px;background:var(--glass);border:1px solid var(--bd);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-radius:26px;padding:6px;z-index:5;box-shadow:0 14px 40px -12px rgba(60,30,160,.5)}
+nav button{flex:1;border:0;background:none;color:var(--mute);padding:8px 2px;border-radius:20px;font-size:.78rem;font-weight:600;line-height:1.2}
+nav button span{display:block;font-size:1.3rem}
+nav button[aria-selected="true"]{background:linear-gradient(100deg,var(--g1),var(--g2));color:#fff}
+</style>
+</head>
+<body>
+<div class="aur"><i></i><i></i><i></i></div>
+<main>
+<header><h1>lumi</h1><div class="streak" id="streak"></div></header>
+<p class="tag">Révise sans stress. <span id="users"></span></p>
+<div id="app"></div>
+</main>
+<nav role="tablist" id="nav"></nav>
+<script>
+(function(){
+var KEY='lumi-v1',S={exams:[],decks:[],log:{},done:{}},tab='plan',deckId=null,study=null,DB=null,UID=null,LIB=[],usersN=null,q='';
+try{var raw=localStorage.getItem(KEY)||localStorage.getItem('revise-v1');if(raw)S=Object.assign(S,JSON.parse(raw))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function uid(){return Math.random().toString(36).slice(2,9)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function ds(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function today(){var d=new Date();d.setHours(0,0,0,0);return d}
+function parse(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+function addDays(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
+function diffDays(a,b){return Math.round((a-b)/864e5)}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
+var DN=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+function label(d,i){return i===0?'Aujourd’hui':i===1?'Demain':DN[d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1)}
+function bump(k,n){var d=ds(today()),l=S.log[d]=S.log[d]||{r:0,ok:0,s:0};l[k]=Math.max(0,l[k]+n);save()}
+function active(d){var l=S.log[ds(d)];return l&&(l.r+l.s)>0}
+function streak(){var d=today(),n=0;if(!active(d))d=addDays(d,-1);while(active(d)){n++;d=addDays(d,-1)}return n}
+
+function plan(){
+  var t=today(),h='<div class="card"><div class="row"><div class="grow"><label for="sj">Matière</label><input id="sj" placeholder="Maths, Histoire…" maxlength="30"></div><div class="grow"><label for="dt">Date du contrôle</label><input id="dt" type="date" min="'+ds(t)+'"></div></div><div class="row" style="margin-top:10px"><div class="grow"><label for="df">Difficulté pour toi</label><select id="df"><option value="1">Facile</option><option value="2" selected>Moyen</option><option value="3">Difficile</option></select></div><button class="b" id="addEx">Ajouter</button></div></div>';
+  var ex=S.exams.filter(function(e){return parse(e.date)>=t}).sort(function(a,b){return a.date<b.date?-1:1});
+  if(!ex.length)return h+'<div class="empty">Ajoute ton prochain contrôle : Lumi répartit les séances jour par jour.</div>';
+  h+='<h2>Contrôles à venir</h2>';
+  ex.forEach(function(e){var n=diffDays(parse(e.date),t);h+='<div class="sess"><div class="grow"><b>'+esc(e.subject)+'</b> <span class="mute">le '+parse(e.date).toLocaleDateString('fr-FR')+'</span></div><span class="pill">'+(n===0?'aujourd’hui':'J-'+n)+'</span><button class="x" data-del-ex="'+e.id+'" aria-label="Supprimer">✕</button></div>'});
+  h+='<h2>Les 7 prochains jours</h2>';var any=false;
+  for(var i=0;i<7;i++){
+    var d=addDays(t,i),k=ds(d),list=[];
+    ex.forEach(function(e){var left=diffDays(parse(e.date),d);if(left>=1&&left<=14){var m=20+10*e.diff;if(left<=2)m=Math.round(m*1.5);list.push({e:e,m:m,p:e.diff/left})}});
+    list.sort(function(a,b){return b.p-a.p});if(!list.length)continue;any=true;
+    h+='<div class="day">'+label(d,i)+'</div>';
+    list.forEach(function(s){var id=s.e.id+'_'+k,dn=S.done[id];h+='<label class="sess'+(dn?' done':'')+'" style="color:var(--ink);font-size:1rem;margin-bottom:8px"><input type="checkbox" data-done="'+id+'"'+(dn?' checked':'')+'><span class="grow">'+esc(s.e.subject)+(s.e.date===ds(addDays(d,1))?' – dernière révision':'')+'</span><span class="pill">'+s.m+' min</span></label>'});
+  }
+  return any?h:h+'<div class="empty">Rien à réviser pour le moment.</div>';
+}
+function dueCards(d){var t=ds(today());return d.cards.filter(function(c){return !c.due||c.due<=t})}
+function cards(){
+  if(study)return studyView();
+  var d=curDeck();if(d)return deckView(d);
+  var h='<div class="card"><div class="row"><div class="grow"><label for="dn">Nouveau paquet de fiches</label><input id="dn" placeholder="Ex : Maths – dérivées" maxlength="40"></div><button class="b" id="addDeck">Créer</button></div></div><div class="card"><label for="imp">Un ami t’a envoyé un code ? Colle-le ici</label><div class="row"><input id="imp" class="grow" placeholder="Code du paquet"><button class="b g" id="impBtn">Importer</button></div></div>';
+  if(!S.decks.length)return h+'<div class="empty">Crée ton premier paquet, ou récupères-en un dans la bibliothèque.</div>';
+  S.decks.forEach(function(x){h+='<div class="sess" data-open="'+x.id+'" style="cursor:pointer"><div class="grow"><b>'+esc(x.name)+'</b><div class="mute">'+x.cards.length+' fiche'+(x.cards.length>1?'s':'')+'</div></div><span class="pill">'+dueCards(x).length+' à revoir</span></div>'});
+  return h;
+}
+function deckView(d){
+  var n=dueCards(d).length,h='<div class="row" style="margin-bottom:10px;align-items:center"><button class="b g" id="back">←</button><h2 style="margin:0" class="grow">'+esc(d.name)+'</h2></div>';
+  h+='<div class="card"><button class="b" id="go"'+(n?'':' disabled')+' style="width:100%">'+(n?'Réviser ('+n+' fiche'+(n>1?'s':'')+')':'Tout est à jour, reviens demain')+'</button></div>';
+  h+='<div class="card"><label for="qq">Question</label><textarea id="qq" placeholder="Ex : Dérivée de x²"></textarea><label for="aa" style="margin-top:8px">Réponse</label><textarea id="aa" placeholder="Ex : 2x"></textarea><div style="margin-top:10px"><button class="b" id="addCard">Ajouter la fiche</button></div></div>';
+  h+='<div class="card"><div class="row">'+(DB?'<div class="grow"><label for="lv">Niveau</label><select id="lv"><option>Seconde</option><option selected>Première</option><option>Terminale</option><option>Autre</option></select></div><button class="b" id="pub">Publier</button>':'')+'<button class="b g" id="exp">Code</button><button class="b g" id="delDeck">Supprimer</button></div><div id="expOut"></div></div>';
+  d.cards.forEach(function(c,i){h+='<div class="sess"><div class="grow"><b>'+esc(c.q)+'</b><div class="mute">'+esc(c.a)+'</div></div><button class="x" data-del-card="'+i+'" aria-label="Supprimer">✕</button></div>'});
+  return h;
+}
+function studyView(){
+  var s=study,c=s.queue[0];
+  if(!c)return '<div class="card study"><div class="q">Bien joué ✨</div><p class="mute">Session terminée : '+s.total+' fiche'+(s.total>1?'s':'')+' vue'+(s.total>1?'s':'')+'.</p><div><button class="b" id="endStudy">Retour</button></div></div>';
+  var h='<p class="mute">Reste : '+s.queue.length+'</p><div class="card study"><div class="q">'+esc(c.q)+'</div>';
+  if(s.show)return h+'<div class="a">'+esc(c.a)+'</div></div><div class="row"><button class="b bad grow" id="no">Pas encore</button><button class="b ok grow" id="yes">Je savais</button></div>';
+  return h+'</div><button class="b" id="reveal" style="width:100%">Voir la réponse</button>';
+}
+function lib(){
+  if(!DB)return '<div class="card empty">Impossible de charger la bibliothèque. Vérifie ta connexion.<br>Tu peux toujours échanger des paquets avec un code.</div>';
+  var h='<div class="card"><label for="sq">Chercher un paquet</label><input id="sq" placeholder="Matière, niveau…" value="'+esc(q)+'"></div>';
+  var f=LIB.filter(function(x){return (x.name+' '+x.level).toLowerCase().indexOf(q.toLowerCase())>-1});
+  if(!f.length)return h+'<div class="empty">Aucun paquet pour l’instant. Crée le tien et publie-le depuis l’onglet Fiches !</div>';
+  f.forEach(function(x){h+='<div class="sess"><div class="grow"><b>'+esc(x.name)+'</b><div class="mute">'+esc(x.level)+' · '+x.cards.length+' fiches</div></div><button class="b" data-get="'+x.id+'">Ajouter</button>'+'</div>'});
+  return h;
+}
+function stats(){
+  var tot=0,ok=0,ses=0,t=today(),bars='';
+  Object.keys(S.log).forEach(function(k){var l=S.log[k];tot+=l.r;ok+=l.ok;ses+=l.s});
+  var days=[],mx=1;for(var i=6;i>=0;i--){var d=addDays(t,-i),l=S.log[ds(d)];var v=l?l.r+l.s*5:0;mx=Math.max(mx,v);days.push([DN[d.getDay()].slice(0,1).toUpperCase(),v])}
+  days.forEach(function(x){bars+='<div><span style="height:'+Math.round(x[1]/mx*80)+'px"></span>'+x[0]+'</div>'});
+  return '<div class="grid"><div class="card stat"><b>'+streak()+' 🔥</b><span class="mute">jours d’affilée</span></div><div class="card stat"><b>'+tot+'</b><span class="mute">fiches revues</span></div><div class="card stat"><b>'+(tot?Math.round(ok/tot*100):0)+'%</b><span class="mute">de réussite</span></div><div class="card stat"><b>'+ses+'</b><span class="mute">séances faites</span></div></div><div class="card"><b>Cette semaine</b><div class="bars">'+bars+'</div></div>';
+}
+var TABS=[['plan','🗓️','Planning'],['cards','📇','Fiches'],['lib','🌐','Biblio'],['stats','📈','Stats']];
+function render(){
+  document.getElementById('nav').innerHTML=TABS.map(function(t){return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'"><span>'+t[1]+'</span>'+t[2]+'</button>'}).join('');
+  var n=streak();document.getElementById('streak').textContent=n?n+' 🔥':'0 🔥';
+  document.getElementById('users').textContent=usersN?usersN+' élève'+(usersN>1?'s':'')+' sur Lumi.':'';
+  document.getElementById('app').innerHTML=tab==='plan'?plan():tab==='cards'?cards():tab==='lib'?lib():stats();
+}
+var INT=[1,2,4,8,16];
+function curDeck(){return S.decks.filter(function(x){return x.id===deckId})[0]}
+document.addEventListener('click',function(ev){
+  var t=ev.target.closest('button,[data-open]')||ev.target,id=t.id,d;
+  if(t.dataset.tab){tab=t.dataset.tab;study=null;render();return}
+  if(id==='addEx'){var sj=val('sj'),dt=val('dt');if(!sj||!dt){alert('Indique la matière et la date.');return}S.exams.push({id:uid(),subject:sj,date:dt,diff:+val('df')});save();render();return}
+  if(t.dataset.delEx){S.exams=S.exams.filter(function(e){return e.id!==t.dataset.delEx});save();render();return}
+  if(id==='addDeck'){var n=val('dn');if(!n)return;var nd={id:uid(),name:n,cards:[]};S.decks.push(nd);deckId=nd.id;save();render();return}
+  if(id==='impBtn'){try{var o=JSON.parse(decodeURIComponent(escape(atob(val('imp')))));S.decks.push({id:uid(),name:String(o.n).slice(0,40),cards:o.c.map(function(c){return{q:String(c[0]),a:String(c[1]),box:1,due:''}})});save();render()}catch(e){alert('Code invalide. Vérifie que tu l’as copié en entier.')}return}
+  if(t.dataset.open){deckId=t.dataset.open;render();return}
+  if(id==='back'){deckId=null;render();return}
+  if(id==='addCard'){d=curDeck();var qq=val('qq'),aa=val('aa');if(!qq||!aa){alert('Remplis la question et la réponse.');return}d.cards.push({q:qq,a:aa,box:1,due:''});save();render();return}
+  if(t.dataset.delCard){curDeck().cards.splice(+t.dataset.delCard,1);save();render();return}
+  if(id==='delDeck'){if(confirm('Supprimer ce paquet ?')){S.decks=S.decks.filter(function(x){return x.id!==deckId});deckId=null;save();render()}return}
+  if(id==='exp'){d=curDeck();var code=btoa(unescape(encodeURIComponent(JSON.stringify({n:d.name,c:d.cards.map(function(c){return[c.q,c.a]})}))));document.getElementById('expOut').innerHTML='<label for="code" style="margin-top:10px">Envoie ce code à tes amis</label><textarea id="code" readonly>'+code+'</textarea>';document.getElementById('code').select();try{navigator.clipboard.writeText(code)}catch(e){}return}
+  if(id==='pub'){d=curDeck();if(d.cards.length<3){alert('Ajoute au moins 3 fiches avant de publier.');return}
+    api('library',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({name:d.name,level:val('lv'),cards:d.cards.map(function(c){return[c.q,c.a]}),by:UID})}).then(function(r){if(!r.ok)throw 0;alert('Publié ! Tout le monde peut maintenant l’ajouter.');loadLib()}).catch(function(){alert('Publication impossible pour le moment.')});return}
+  if(t.dataset.get){var x=LIB.filter(function(l){return l.id===t.dataset.get})[0];if(x){S.decks.push({id:uid(),name:x.name,cards:x.cards.map(function(c){return{q:String(c[0]),a:String(c[1]),box:1,due:''}})});save();alert('Ajouté à tes fiches !')}return}
+  if(id==='go'){d=curDeck();var qd=dueCards(d);study={queue:qd.slice(),total:qd.length,show:false};render();return}
+  if(id==='reveal'){study.show=true;render();return}
+  if(id==='yes'||id==='no'){var c=study.queue.shift();
+    if(id==='yes'){if(!c.fail)bump('ok',1);bump('r',c.fail?0:1);c.box=Math.min(5,(c.box||1)+(c.fail?0:1));c.due=ds(addDays(today(),INT[c.box-1]));delete c.fail}
+    else{if(!c.fail)bump('r',1);c.box=1;c.fail=true;study.queue.push(c)}
+    study.show=false;save();render();return}
+  if(id==='endStudy'){study=null;render()}
+});
+document.addEventListener('change',function(ev){var id=ev.target.dataset.done;if(id){S.done[id]=ev.target.checked;bump('s',ev.target.checked?1:-1);render()}});
+document.addEventListener('input',function(ev){if(ev.target.id==='sq'){q=ev.target.value;var p=ev.target.selectionStart;render();var e=document.getElementById('sq');e.focus();e.setSelectionRange(p,p)}});
+render();
+var SB='https://bxsoopxkpurrqduyozdz.supabase.co/rest/v1/',KEYP='sb_publishable_2EPU8nrDJwtznkM6Prv5hQ_PFzIhmIN';
+function api(p,o){o=o||{};o.headers=Object.assign({apikey:KEYP,'Content-Type':'application/json'},o.headers||{});return fetch(SB+p,o)}
+function idle(){var e=document.activeElement;return !e||!/INPUT|TEXTAREA|SELECT/.test(e.tagName)}
+function loadLib(){api('library?select=*&order=at.desc&limit=80').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(a){DB=true;LIB=a.filter(function(o){return Array.isArray(o.cards)&&o.name});if(idle())render()}).catch(function(){})}
+function countUsers(){api('visitors?select=id&limit=1',{headers:{Prefer:'count=exact'}}).then(function(r){var m=(r.headers.get('content-range')||'').split('/')[1];if(m&&m!=='*'){usersN=+m;if(idle())render()}}).catch(function(){})}
+try{UID=localStorage.getItem('lumi-uid');if(!UID){UID=uid()+uid()+uid();localStorage.setItem('lumi-uid',UID)}}catch(e){UID=uid()+uid()}
+api('visitors?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify({id:UID,t:Date.now()})}).then(countUsers).catch(countUsers);
+loadLib();
+})();
+</script>
+</body>
+</html>
